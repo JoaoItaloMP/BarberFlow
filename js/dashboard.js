@@ -119,12 +119,46 @@ form.addEventListener("submit", (event) => {
     time
   };
 
-  /* Busca agendamentos atuais */
-  const appointments =
-    getAppointments();
+/* Busca agendamentos atuais */
+const appointments =
+getAppointments();
 
-  /* Adiciona novo agendamento */
-  appointments.push(newAppointment);
+/* =========================
+VERIFICA HORÁRIO DUPLICADO
+========================== */
+
+/*
+Verifica se já existe
+um agendamento com:
+
+- mesma data
+- mesmo horário
+*/
+const alreadyExists =
+appointments.some((appointment) => {
+
+    return (
+    appointment.date === date &&
+    appointment.time === time
+    );
+
+});
+
+/*
+Se já existir,
+interrompe o cadastro.
+*/
+if (alreadyExists) {
+
+alert(
+    "Já existe um agendamento neste horário."
+);
+
+return;
+}
+
+/* Adiciona novo agendamento */
+appointments.push(newAppointment);
 
   /* Salva novamente */
   saveAppointments(appointments);
