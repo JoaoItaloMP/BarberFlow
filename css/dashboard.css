@@ -1,0 +1,203 @@
+/* =========================
+   RESET
+========================== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* =========================
+   BODY
+========================== */
+body {
+
+  background-color: #0f0f0f;
+
+  color: white;
+
+  font-family: Arial, sans-serif;
+}
+
+/* =========================
+   CONTAINER
+========================== */
+.container {
+
+  width: 100%;
+
+  max-width: 1200px;
+
+  margin: 0 auto;
+
+  padding: 0 20px;
+}
+
+/* =========================
+   HEADER
+========================== */
+.dashboard-header {
+
+  padding: 20px 0;
+
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+
+  background-color: #161616;
+}
+
+.dashboard-header .container {
+
+  display: flex;
+
+  justify-content: space-between;
+
+  align-items: center;
+}
+
+.dashboard-header a {
+
+  color: #c59d5f;
+
+  text-decoration: none;
+}
+
+/* =========================
+   DASHBOARD
+========================== */
+.dashboard {
+
+  display: grid;
+
+  grid-template-columns: 350px 1fr;
+
+  gap: 40px;
+
+  padding: 50px 20px;
+}
+
+/* =========================
+   FORMULÁRIO
+========================== */
+.form-section {
+
+  background-color: #1b1b1b;
+
+  padding: 30px;
+
+  border-radius: 20px;
+
+  height: fit-content;
+}
+
+.form-section h2 {
+
+  margin-bottom: 25px;
+}
+
+/* Formulário */
+form {
+
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 15px;
+}
+
+/* Inputs */
+input,
+select {
+
+  padding: 14px;
+
+  border-radius: 10px;
+
+  border: none;
+
+  background-color: #2a2a2a;
+
+  color: white;
+}
+
+/* Botão */
+button {
+
+  padding: 14px;
+
+  border: none;
+
+  border-radius: 10px;
+
+  background-color: #c59d5f;
+
+  color: white;
+
+  font-weight: bold;
+
+  cursor: pointer;
+
+  transition: 0.3s;
+}
+
+button:hover {
+
+  opacity: 0.8;
+}
+
+/* =========================
+   AGENDAMENTOS
+========================== */
+.appointments-section h2 {
+
+  margin-bottom: 25px;
+}
+
+/* Lista dos cards */
+#appointments-list {
+
+  display: grid;
+
+  gap: 20px;
+}
+
+/* Card */
+.appointment-card {
+
+  background-color: #1b1b1b;
+
+  padding: 20px;
+
+  border-radius: 16px;
+
+  border-left: 5px solid #c59d5f;
+}
+
+/* Nome */
+.appointment-card h3 {
+
+  margin-bottom: 10px;
+}
+
+/* Texto */
+.appointment-card p {
+
+  color: #b3b3b3;
+
+  margin-bottom: 5px;
+}
+
+/* Botões do card */
+.card-buttons {
+
+  display: flex;
+
+  gap: 10px;
+
+  margin-top: 15px;
+}
+
+/* Botão excluir */
+.delete-btn {
+
+  background-color: #c0392b;
+}
