@@ -16,6 +16,12 @@ const form =
 const appointmentsList =
   document.querySelector("#appointments-list");
 
+/*
+Elemento do toast.
+*/
+const toast =
+  document.querySelector("#toast");
+
 /* =========================
    CONTROLE DE EDIÇÃO
 ========================== */
@@ -174,8 +180,8 @@ interrompe o cadastro.
 */
 if (alreadyExists) {
 
-alert(
-    "Já existe um agendamento neste horário."
+showToast(
+  "Já existe um agendamento neste horário."
 );
 
 return;
@@ -214,6 +220,11 @@ if (editingIndex !== null) {
 
   /* Atualiza tela */
   renderAppointments();
+
+  /* Exibe sucesso */
+  showToast(
+    "Agendamento salvo com sucesso."
+  );
 
   /* Limpa formulário */
   form.reset();
@@ -281,6 +292,11 @@ function deleteAppointment(index) {
 
   /* Atualiza tela */
   renderAppointments();
+
+  /* Notificação */
+  showToast(
+    "Agendamento removido."
+  );
 }
 
 /* =========================
@@ -292,3 +308,28 @@ function deleteAppointment(index) {
   quando a página abrir.
 */
 renderAppointments();
+
+/* =========================
+   TOAST NOTIFICATION
+========================== */
+
+/*
+  Exibe notificações
+  elegantes na tela.
+*/
+function showToast(message) {
+
+  /* Define texto */
+  toast.textContent = message;
+
+  /* Mostra toast */
+  toast.classList.add("show");
+
+  /* Remove após 3 segundos */
+  setTimeout(() => {
+
+    toast.classList.remove("show");
+
+  }, 3000);
+
+}
