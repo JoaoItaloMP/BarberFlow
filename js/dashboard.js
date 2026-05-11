@@ -17,6 +17,22 @@ const appointmentsList =
   document.querySelector("#appointments-list");
 
 /* =========================
+   CONTROLE DE EDIÇÃO
+========================== */
+
+/*
+  Armazena o índice do
+  agendamento em edição.
+
+  Se for null:
+  estamos criando.
+
+  Se tiver valor:
+  estamos editando.
+*/
+let editingIndex = null;
+
+/* =========================
    RENDERIZAR AGENDAMENTOS
 ========================== */
 
@@ -68,14 +84,22 @@ function renderAppointments() {
 
       <div class="card-buttons">
 
+        <!-- Botão editar -->
         <button
-          class="delete-btn"
-          onclick="deleteAppointment(${index})"
+            onclick="editAppointment(${index})"
         >
-          Excluir
+            Editar
         </button>
 
-      </div>
+        <!-- Botão excluir -->
+        <button
+            class="delete-btn"
+            onclick="deleteAppointment(${index})"
+        >
+            Excluir
+        </button>
+
+        </div>
     `;
 
     /* Adiciona card na tela */
@@ -157,8 +181,33 @@ alert(
 return;
 }
 
-/* Adiciona novo agendamento */
-appointments.push(newAppointment);
+/* =========================
+   MODO EDIÇÃO
+========================== */
+
+/*
+  Se estiver editando:
+  atualiza item existente.
+*/
+if (editingIndex !== null) {
+
+  appointments[editingIndex] =
+    newAppointment;
+
+  /*
+    Reseta modo edição
+  */
+  editingIndex = null;
+
+} else {
+
+  /*
+    Se não:
+    cria novo agendamento.
+  */
+  appointments.push(newAppointment);
+
+}
 
   /* Salva novamente */
   saveAppointments(appointments);
@@ -179,6 +228,45 @@ appointments.push(newAppointment);
   Remove um agendamento
   pelo índice do array.
 */
+
+/* =========================
+   EDITAR AGENDAMENTO
+========================== */
+
+/*
+  Preenche o formulário
+  com os dados do card.
+*/
+function editAppointment(index) {
+
+  /* Busca agendamentos */
+  const appointments =
+    getAppointments();
+
+  /* Agendamento selecionado */
+  const appointment =
+    appointments[index];
+
+  /* Preenche formulário */
+  document.querySelector("#client-name").value =
+    appointment.name;
+
+  document.querySelector("#service").value =
+    appointment.service;
+
+  document.querySelector("#date").value =
+    appointment.date;
+
+  document.querySelector("#time").value =
+    appointment.time;
+
+  /*
+    Define índice em edição
+  */
+  editingIndex = index;
+
+}
+
 function deleteAppointment(index) {
 
   /* Busca agendamentos */
