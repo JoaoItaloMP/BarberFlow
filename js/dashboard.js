@@ -90,9 +90,21 @@ function renderAppointments() {
 
       <p>
         Status:
-        <strong>
+
+        <span class="
+          status-badge
+
+          ${
+            appointment.status === "Agendado"
+              ? "status-agendado"
+              : appointment.status === "Em andamento"
+              ? "status-andamento"
+              : "status-finalizado"
+          }
+        ">
           ${appointment.status}
-        </strong>
+        </span>
+
       </p>
       
 

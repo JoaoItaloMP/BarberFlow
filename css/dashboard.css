@@ -249,3 +249,58 @@ button:hover {
 
   transform: translateX(0);
 }
+
+/* =========================
+   STATUS BADGES
+========================== */
+
+/*
+  Estilo base das badges.
+*/
+.status-badge {
+
+  display: inline-block;
+
+  padding: 6px 12px;
+
+  border-radius: 999px;
+
+  font-size: 0.85rem;
+
+  font-weight: bold;
+
+  margin-left: 8px;
+}
+
+/* =========================
+   AGENDADO
+========================== */
+
+.status-agendado {
+
+  background-color: rgba(241, 196, 15, 0.2);
+
+  color: #f1c40f;
+}
+
+/* =========================
+   EM ANDAMENTO
+========================== */
+
+.status-andamento {
+
+  background-color: rgba(52, 152, 219, 0.2);
+
+  color: #3498db;
+}
+
+/* =========================
+   FINALIZADO
+========================== */
+
+.status-finalizado {
+
+  background-color: rgba(46, 204, 113, 0.2);
+
+  color: #2ecc71;
+}
