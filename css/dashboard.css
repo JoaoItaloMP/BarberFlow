@@ -304,3 +304,26 @@ button:hover {
 
   color: #2ecc71;
 }
+
+/* =========================
+   HEADER DOS AGENDAMENTOS
+========================== */
+
+.appointments-header {
+
+  display: flex;
+
+  justify-content: space-between;
+
+  align-items: center;
+
+  margin-bottom: 25px;
+
+  gap: 20px;
+}
+
+/* Select do filtro */
+#status-filter {
+
+  width: 220px;
+}

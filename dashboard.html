@@ -103,15 +103,41 @@
     </section>
 
     <!-- =========================
-         LISTA DE AGENDAMENTOS
+     LISTA DE AGENDAMENTOS
     ========================== -->
     <section class="appointments-section">
 
-      <h2>
-        Agendamentos
-      </h2>
+      <!-- Topo da seção -->
+      <div class="appointments-header">
 
-      <!-- Container onde os cards serão renderizados -->
+        <h2>
+          Agendamentos
+        </h2>
+
+        <!-- Filtro -->
+        <select id="status-filter">
+
+          <option value="Todos">
+            Todos
+          </option>
+
+          <option value="Agendado">
+            Agendado
+          </option>
+
+          <option value="Em andamento">
+            Em andamento
+          </option>
+
+          <option value="Finalizado">
+            Finalizado
+          </option>
+
+        </select>
+
+      </div>
+
+      <!-- Lista dos cards -->
       <div id="appointments-list">
 
       </div>

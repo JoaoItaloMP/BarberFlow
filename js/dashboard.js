@@ -22,6 +22,12 @@ Elemento do toast.
 const toast =
   document.querySelector("#toast");
 
+/*
+  Select do filtro.
+*/
+const statusFilter =
+  document.querySelector("#status-filter");
+
 /* =========================
    CONTROLE DE EDIÇÃO
 ========================== */
@@ -59,8 +65,37 @@ function renderAppointments() {
   const appointments =
     getAppointments();
 
+  /* =========================
+   FILTRO DE STATUS
+  ========================== */
+
+  /*
+    Valor selecionado
+    no filtro.
+
+    Se o select não existir,
+    usa "Todos".
+  */
+  const selectedStatus =
+    statusFilter
+      ? statusFilter.value
+      : "Todos";
+
+  const filteredAppointments =
+    selectedStatus === "Todos"
+
+      ? appointments
+
+      : appointments.filter((appointment) => {
+
+          return (
+            appointment.status === selectedStatus
+          );
+
+        });
+
   /* Percorre todos os agendamentos */
-  appointments.forEach((appointment, index) => {
+  filteredAppointments.forEach((appointment, index) => {
 
     /* Cria card */
     const card =
@@ -192,21 +227,28 @@ VERIFICA HORÁRIO DUPLICADO
 ========================== */
 
 /*
-Verifica se já existe
-um agendamento com:
-
-- mesma data
-- mesmo horário
+  Verifica se já existe
+  outro agendamento
+  com mesma data e horário.
 */
 const alreadyExists =
-appointments.some((appointment) => {
+  appointments.some((appointment, index) => {
+
+    /*
+      Ignora o próprio item
+      durante edição.
+    */
+    if (index === editingIndex) {
+
+      return false;
+    }
 
     return (
-    appointment.date === date &&
-    appointment.time === time
+      appointment.date === date &&
+      appointment.time === time
     );
 
-});
+  });
 
 /*
 Se já existir,
@@ -387,6 +429,24 @@ function deleteAppointment(index) {
   showToast(
     "Agendamento removido."
   );
+}
+
+/* =========================
+   EVENTO DO FILTRO
+========================== */
+
+/*
+  Adiciona evento apenas
+  se o filtro existir.
+*/
+if (statusFilter) {
+
+  statusFilter.addEventListener("change", () => {
+
+    renderAppointments();
+
+  });
+
 }
 
 /* =========================
