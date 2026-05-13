@@ -28,6 +28,12 @@ const toast =
 const statusFilter =
   document.querySelector("#status-filter");
 
+/*
+  Input de busca.
+*/
+const searchInput =
+  document.querySelector("#search-input");
+
 /* =========================
    CONTROLE DE EDIÇÃO
 ========================== */
@@ -81,18 +87,54 @@ function renderAppointments() {
       ? statusFilter.value
       : "Todos";
 
-  const filteredAppointments =
-    selectedStatus === "Todos"
+    /* =========================
+      FILTRO DE STATUS
+    ========================== */
 
-      ? appointments
+    let filteredAppointments =
+      appointments;
 
-      : appointments.filter((appointment) => {
+    /*
+      Filtra por status
+    */
+    if (selectedStatus !== "Todos") {
+
+      filteredAppointments =
+        filteredAppointments.filter((appointment) => {
 
           return (
             appointment.status === selectedStatus
           );
 
         });
+
+    }
+
+    /* =========================
+      FILTRO DE BUSCA
+    ========================== */
+
+    /*
+      Texto digitado
+    */
+    const searchTerm =
+      searchInput
+        ? searchInput.value.toLowerCase()
+        : "";
+
+    /*
+      Filtra pelo nome
+    */
+    filteredAppointments =
+      filteredAppointments.filter((appointment) => {
+
+        return (
+          appointment.name
+            .toLowerCase()
+            .includes(searchTerm)
+        );
+
+      });
 
   /* Percorre todos os agendamentos */
   filteredAppointments.forEach((appointment, index) => {
@@ -442,6 +484,24 @@ function deleteAppointment(index) {
 if (statusFilter) {
 
   statusFilter.addEventListener("change", () => {
+
+    renderAppointments();
+
+  });
+
+}
+
+/* =========================
+   EVENTO DE BUSCA
+========================== */
+
+/*
+  Atualiza lista
+  enquanto digita.
+*/
+if (searchInput) {
+
+  searchInput.addEventListener("input", () => {
 
     renderAppointments();
 

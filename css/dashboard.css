@@ -327,3 +327,12 @@ button:hover {
 
   width: 220px;
 }
+
+/* =========================
+   BUSCA DE CLIENTES
+========================== */
+
+#search-input {
+
+  width: 250px;
+}
