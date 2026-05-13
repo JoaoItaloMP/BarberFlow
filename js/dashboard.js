@@ -88,7 +88,21 @@ function renderAppointments() {
         ${appointment.time}
       </p>
 
+      <p>
+        Status:
+        <strong>
+          ${appointment.status}
+        </strong>
+      </p>
+      
+
       <div class="card-buttons">
+
+        <button
+          onclick="changeStatus(${index})"
+        >
+          Alterar Status
+        </button>
 
         <!-- Botão editar -->
         <button
@@ -140,14 +154,22 @@ form.addEventListener("submit", (event) => {
   const time =
     document.querySelector("#time").value;
 
-  /* Cria objeto do agendamento */
+  /*
+  Objeto do novo agendamento
+  */
   const newAppointment = {
 
     name,
     service,
     date,
-    time
-  };
+    time,
+
+    /*
+      Status inicial
+      do atendimento.
+    */
+    status: "Agendado"
+};
 
 /* Busca agendamentos atuais */
 const appointments =
@@ -275,6 +297,62 @@ function editAppointment(index) {
     Define índice em edição
   */
   editingIndex = index;
+
+}
+
+/* =========================
+   ALTERAR STATUS
+========================== */
+
+/*
+  Alterna o status
+  do atendimento.
+*/
+function changeStatus(index) {
+
+  /* Busca agendamentos */
+  const appointments =
+    getAppointments();
+
+  /* Agendamento atual */
+  const appointment =
+    appointments[index];
+
+  /*
+    Fluxo dos status:
+    Agendado
+    → Em andamento
+    → Finalizado
+  */
+
+  if (appointment.status === "Agendado") {
+
+    appointment.status =
+      "Em andamento";
+
+  } else if (
+    appointment.status === "Em andamento"
+  ) {
+
+    appointment.status =
+      "Finalizado";
+
+  } else {
+
+    appointment.status =
+      "Agendado";
+  }
+
+  /* Salva alterações */
+  saveAppointments(appointments);
+
+  /* Atualiza tela */
+  renderAppointments();
+
+  /* Toast */
+  showToast(
+    "Status atualizado."
+  );
 
 }
 
