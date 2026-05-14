@@ -336,3 +336,53 @@ button:hover {
 
   width: 250px;
 }
+
+/* =========================
+   NOVO LAYOUT DOS CARDS
+========================== */
+
+/* Topo do card */
+.appointment-top {
+
+  display: flex;
+
+  justify-content: space-between;
+
+  align-items: center;
+
+  margin-bottom: 20px;
+}
+
+/* Horário destacado */
+.appointment-time {
+
+  background-color: #c59d5f;
+
+  color: #111;
+
+  padding: 8px 14px;
+
+  border-radius: 999px;
+
+  font-weight: bold;
+
+  font-size: 0.9rem;
+}
+
+/* Informações */
+.appointment-info {
+
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 10px;
+
+  margin-bottom: 20px;
+}
+
+/* Espaçamento interno */
+.appointment-info p {
+
+  line-height: 1.5;
+}

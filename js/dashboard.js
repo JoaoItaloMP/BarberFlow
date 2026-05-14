@@ -175,43 +175,56 @@ function renderAppointments() {
 
     /* Estrutura HTML do card */
     card.innerHTML = `
-      <h3>${appointment.name}</h3>
+      
+      <!-- Cabeçalho -->
+      <div class="appointment-top">
+      
+        <!-- Nome -->
+        <h3>
+          ${appointment.name}
+        </h3>
 
-      <p>
-        Serviço:
-        ${appointment.service}
-      </p>
-
-      <p>
-        Data:
-        ${appointment.date}
-      </p>
-
-      <p>
-        Horário:
-        ${appointment.time}
-      </p>
-
-      <p>
-        Status:
-
-        <span class="
-          status-badge
-
-          ${
-            appointment.status === "Agendado"
-              ? "status-agendado"
-              : appointment.status === "Em andamento"
-              ? "status-andamento"
-              : "status-finalizado"
-          }
-        ">
-          ${appointment.status}
+        <!-- Horário -->
+        <span class="appointment-time">
+          ${appointment.time}
         </span>
 
-      </p>
-      
+      </div>
 
+      <!-- Informações -->
+      <div class="appointment-info">
+
+        <p>
+          <strong>Serviço:</strong>
+          ${appointment.service}
+        </p>
+
+        <p>
+          <strong>Data:</strong>
+          ${appointment.date}
+        </p>
+
+        <p>
+          <strong>Status:</strong>
+
+          <span class="
+            status-badge
+
+            ${
+              appointment.status === "Agendado"
+                ? "status-agendado"
+                : appointment.status === "Em andamento"
+                ? "status-andamento"
+                : "status-finalizado"
+            }
+          ">
+            ${appointment.status}
+          </span>
+        </p>
+
+      </div>
+
+      <!-- Botões -->
       <div class="card-buttons">
 
         <button
@@ -220,22 +233,20 @@ function renderAppointments() {
           Alterar Status
         </button>
 
-        <!-- Botão editar -->
         <button
-            onclick="editAppointment(${index})"
+          onclick="editAppointment(${index})"
         >
-            Editar
+          Editar
         </button>
 
-        <!-- Botão excluir -->
         <button
-            class="delete-btn"
-            onclick="deleteAppointment(${index})"
+          class="delete-btn"
+          onclick="deleteAppointment(${index})"
         >
-            Excluir
+          Excluir
         </button>
 
-        </div>
+      </div>
     `;
 
     /* Adiciona card na tela */
