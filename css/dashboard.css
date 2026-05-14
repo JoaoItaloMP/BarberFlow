@@ -386,3 +386,53 @@ button:hover {
 
   line-height: 1.5;
 }
+
+/* =========================
+   RESPONSIVIDADE
+========================== */
+
+@media (max-width: 768px) {
+
+  /* Container principal */
+  .dashboard-container {
+
+    padding: 20px;
+  }
+
+  /* Cabeçalho */
+  .appointments-header {
+
+    flex-direction: column;
+
+    align-items: stretch;
+  }
+
+  /* Inputs e filtros */
+  #status-filter,
+  #search-input {
+
+    width: 100%;
+  }
+
+  /* Topo do card */
+  .appointment-top {
+
+    flex-direction: column;
+
+    align-items: flex-start;
+
+    gap: 12px;
+  }
+
+  /* Botões */
+  .card-buttons {
+
+    flex-direction: column;
+  }
+
+  .card-buttons button {
+
+    width: 100%;
+  }
+
+}
