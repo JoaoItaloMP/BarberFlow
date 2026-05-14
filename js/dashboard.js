@@ -70,6 +70,33 @@ function renderAppointments() {
   /* Busca agendamentos salvos */
   const appointments =
     getAppointments();
+  
+  /* =========================
+   ORDENAÇÃO DA AGENDA
+  ========================== */
+  /*
+    Organiza agendamentos
+    por data e horário.
+  */
+  appointments.sort((a, b) => {
+
+    /*
+      Cria datas completas
+      para comparação.
+    */
+    const dateA =
+      new Date(`${a.date}T${a.time}`);
+
+    const dateB =
+      new Date(`${b.date}T${b.time}`);
+
+    /*
+      Ordem crescente:
+      mais próximo primeiro.
+    */
+    return dateA - dateB;
+
+  });
 
   /* =========================
    FILTRO DE STATUS
