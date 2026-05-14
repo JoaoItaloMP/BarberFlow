@@ -225,7 +225,7 @@ function renderAppointments() {
       });
 
   /* Percorre todos os agendamentos */
-  filteredAppointments.forEach((appointment, index) => {
+  filteredAppointments.forEach((appointment) => {
 
     /* Cria card */
     const card =
@@ -289,21 +289,21 @@ function renderAppointments() {
       <div class="card-buttons">
 
         <button
-          onclick="changeStatus(${index})"
-        >
+          onclick="changeStatus('${appointment.id}')"
+          >
           Alterar Status
         </button>
 
         <button
-          onclick="editAppointment(${index})"
-        >
+          onclick="editAppointment('${appointment.id}')"
+          >
           Editar
         </button>
 
         <button
           class="delete-btn"
-          onclick="deleteAppointment(${index})"
-        >
+          onclick="deleteAppointment('${appointment.id}')"
+          >
           Excluir
         </button>
 
@@ -347,6 +347,8 @@ form.addEventListener("submit", (event) => {
   */
   const newAppointment = {
 
+    id: crypto.randomUUID(),
+
     name,
     service,
     date,
@@ -373,13 +375,13 @@ VERIFICA HORÁRIO DUPLICADO
   com mesma data e horário.
 */
 const alreadyExists =
-  appointments.some((appointment, index) => {
+  appointments.some((appointment) => {
 
     /*
       Ignora o próprio item
       durante edição.
     */
-    if (index === editingIndex) {
+    if (appointment.id === editingIndex) {
 
       return false;
     }
@@ -414,7 +416,27 @@ return;
 */
 if (editingIndex !== null) {
 
-  appointments[editingIndex] =
+  /*
+  Busca índice real
+  pelo ID.
+  */
+  const appointmentIndex =
+    appointments.findIndex((appointment) => {
+
+      return appointment.id === editingIndex;
+
+    });
+
+  /*
+    Mantém mesmo ID
+  */
+  newAppointment.id =
+    editingIndex;
+
+  /*
+    Atualiza item
+  */
+  appointments[appointmentIndex] =
     newAppointment;
 
   /*
@@ -467,7 +489,7 @@ if (editingIndex !== null) {
   Preenche o formulário
   com os dados do card.
 */
-function editAppointment(index) {
+function editAppointment(id) {
 
   /* Busca agendamentos */
   const appointments =
@@ -475,7 +497,11 @@ function editAppointment(index) {
 
   /* Agendamento selecionado */
   const appointment =
-    appointments[index];
+  appointments.find((appointment) => {
+
+    return appointment.id === id;
+
+  });
 
   /* Preenche formulário */
   document.querySelector("#client-name").value =
@@ -493,7 +519,7 @@ function editAppointment(index) {
   /*
     Define índice em edição
   */
-  editingIndex = index;
+  editingIndex = id;
 
 }
 
@@ -505,7 +531,7 @@ function editAppointment(index) {
   Alterna o status
   do atendimento.
 */
-function changeStatus(index) {
+function changeStatus(id) {
 
   /* Busca agendamentos */
   const appointments =
@@ -513,8 +539,11 @@ function changeStatus(index) {
 
   /* Agendamento atual */
   const appointment =
-    appointments[index];
+  appointments.find((appointment) => {
 
+    return appointment.id === id;
+
+  });
   /*
     Fluxo dos status:
     Agendado
@@ -555,17 +584,21 @@ function changeStatus(index) {
 
 }
 
-function deleteAppointment(index) {
+function deleteAppointment(id) {
 
   /* Busca agendamentos */
   const appointments =
     getAppointments();
 
   /* Remove item */
-  appointments.splice(index, 1);
+  const updatedAppointments =
+  appointments.filter((appointment) => {
 
-  /* Salva novamente */
-  saveAppointments(appointments);
+    return appointment.id !== id;
+
+  });
+
+saveAppointments(updatedAppointments);
 
   /* Atualiza tela */
   renderAppointments();
@@ -631,6 +664,23 @@ renderAppointments();
 
 /* Atualiza métricas */
 updateStats();
+
+/* =========================
+   FUNÇÕES GLOBAIS
+========================== */
+
+/*
+  Torna funções acessíveis
+  no HTML inline.
+*/
+window.changeStatus =
+  changeStatus;
+
+window.editAppointment =
+  editAppointment;
+
+window.deleteAppointment =
+  deleteAppointment;
 
 /* =========================
    TOAST NOTIFICATION
