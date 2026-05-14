@@ -35,6 +35,21 @@ const searchInput =
   document.querySelector("#search-input");
 
 /* =========================
+   ELEMENTOS DAS ESTATÍSTICAS
+========================== */
+
+const totalStat =
+  document.querySelector("#total-stat");
+
+const scheduledStat =
+  document.querySelector("#scheduled-stat");
+
+const progressStat =
+  document.querySelector("#progress-stat");
+
+const finishedStat =
+  document.querySelector("#finished-stat");
+/* =========================
    CONTROLE DE EDIÇÃO
 ========================== */
 
@@ -49,6 +64,52 @@ const searchInput =
   estamos editando.
 */
 let editingIndex = null;
+
+/* =========================
+   ATUALIZA ESTATÍSTICAS
+========================== */
+
+function updateStats() {
+
+  /* Busca agendamentos */
+  const appointments =
+    getAppointments();
+
+  /* Total */
+  totalStat.textContent =
+    appointments.length;
+
+  /* Agendados */
+  scheduledStat.textContent =
+    appointments.filter((appointment) => {
+
+      return (
+        appointment.status === "Agendado"
+      );
+
+    }).length;
+
+  /* Em andamento */
+  progressStat.textContent =
+    appointments.filter((appointment) => {
+
+      return (
+        appointment.status === "Em andamento"
+      );
+
+    }).length;
+
+  /* Finalizados */
+  finishedStat.textContent =
+    appointments.filter((appointment) => {
+
+      return (
+        appointment.status === "Finalizado"
+      );
+
+    }).length;
+
+}
 
 /* =========================
    RENDERIZAR AGENDAMENTOS
@@ -377,6 +438,8 @@ if (editingIndex !== null) {
   /* Atualiza tela */
   renderAppointments();
 
+  updateStats();
+
   /* Exibe sucesso */
   showToast(
     "Agendamento salvo com sucesso."
@@ -483,6 +546,8 @@ function changeStatus(index) {
   /* Atualiza tela */
   renderAppointments();
 
+  updateStats();
+
   /* Toast */
   showToast(
     "Status atualizado."
@@ -505,6 +570,8 @@ function deleteAppointment(index) {
   /* Atualiza tela */
   renderAppointments();
 
+  updateStats();
+
   /* Notificação */
   showToast(
     "Agendamento removido."
@@ -525,6 +592,8 @@ if (statusFilter) {
 
     renderAppointments();
 
+    updateStats();
+
   });
 
 }
@@ -543,6 +612,8 @@ if (searchInput) {
 
     renderAppointments();
 
+    updateStats();
+
   });
 
 }
@@ -555,7 +626,11 @@ if (searchInput) {
   Renderiza os agendamentos
   quando a página abrir.
 */
+/* Inicializa sistema */
 renderAppointments();
+
+/* Atualiza métricas */
+updateStats();
 
 /* =========================
    TOAST NOTIFICATION
