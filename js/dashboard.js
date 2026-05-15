@@ -706,3 +706,32 @@ function showToast(message) {
   }, 3000);
 
 }
+
+/* =========================
+   FULLCALENDAR
+========================== */
+
+/*
+  Elemento do calendário
+*/
+const calendarEl =
+  document.querySelector("#calendar");
+
+/*
+  Inicializa calendário
+*/
+const calendar =
+  new FullCalendar.Calendar(calendarEl, {
+
+    initialView: "dayGridMonth",
+
+    locale: "pt-br",
+
+    height: "auto"
+
+  });
+
+/*
+  Renderiza calendário
+*/
+calendar.render();
