@@ -460,6 +460,8 @@ if (editingIndex !== null) {
   /* Atualiza tela */
   renderAppointments();
 
+  updateCalendarEvents();
+
   updateStats();
 
   /* Exibe sucesso */
@@ -575,6 +577,8 @@ function changeStatus(id) {
   /* Atualiza tela */
   renderAppointments();
 
+  updateCalendarEvents();
+
   updateStats();
 
   /* Toast */
@@ -603,6 +607,8 @@ saveAppointments(updatedAppointments);
   /* Atualiza tela */
   renderAppointments();
 
+  updateCalendarEvents();
+
   updateStats();
 
   /* Notificação */
@@ -625,6 +631,8 @@ if (statusFilter) {
 
     renderAppointments();
 
+    updateCalendarEvents();
+
     updateStats();
 
   });
@@ -644,6 +652,8 @@ if (searchInput) {
   searchInput.addEventListener("input", () => {
 
     renderAppointments();
+
+    updateCalendarEvents();
 
     updateStats();
 
@@ -720,6 +730,55 @@ const calendarEl =
 /*
   Inicializa calendário
 */
+
+/* =========================
+   EVENTOS DO CALENDÁRIO
+========================== */
+
+function updateCalendarEvents() {
+
+  /*
+    Remove eventos antigos
+  */
+  calendar.removeAllEvents();
+
+  /*
+    Busca agendamentos
+  */
+  const appointments =
+    getAppointments();
+
+  /*
+    Adiciona eventos
+  */
+  appointments.forEach((appointment) => {
+
+    /*
+      Cria evento
+    */
+    calendar.addEvent({
+
+      title:
+        `${appointment.time} - ${appointment.name}`,
+
+      start:
+        `${appointment.date}T${appointment.time}`,
+
+      extendedProps: {
+
+        service:
+          appointment.service,
+
+        status:
+          appointment.status
+      }
+
+    });
+
+  });
+
+}
+
 const calendar =
   new FullCalendar.Calendar(calendarEl, {
 
@@ -735,3 +794,6 @@ const calendar =
   Renderiza calendário
 */
 calendar.render();
+
+/* Atualiza eventos */
+updateCalendarEvents();
