@@ -9,6 +9,12 @@
 const form =
   document.querySelector("#appointment-form");
 
+const clientNameInput =
+  document.querySelector("#client-name");
+
+const dateInput =
+  document.querySelector("#date");
+
 /*
   Captura a lista onde
   os cards serão renderizados.
@@ -786,9 +792,47 @@ const calendar =
 
     locale: "pt-br",
 
-    height: "auto"
+    height: "auto",
 
-  });
+    /*
+      Permite clicar
+      nos dias.
+    */
+    dateClick(info) {
+
+      /*
+        Preenche input
+        de data.
+      */
+      dateInput.value =
+        info.dateStr;
+
+      /*
+        Faz scroll suave
+        até formulário.
+      */
+      form.scrollIntoView({
+
+        behavior: "smooth"
+
+      });
+
+      /*
+        Foca no nome
+        do cliente.
+      */
+      clientNameInput.focus();
+
+      /*
+        Toast
+      */
+      showToast(
+        "Data selecionada no calendário"
+      );
+
+    }
+
+});
 
 /*
   Renderiza calendário

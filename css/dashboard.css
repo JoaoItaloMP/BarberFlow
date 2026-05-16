@@ -758,3 +758,22 @@ h3 {
   border-color:
     rgba(255,255,255,0.06);
 }
+
+/* =========================
+   INTERAÇÃO CALENDÁRIO
+========================== */
+
+/* Hover nos dias */
+.fc-daygrid-day {
+
+  cursor: pointer;
+}
+
+/* Hover premium */
+.fc-daygrid-day:hover {
+
+  background:
+    rgba(197, 157, 95, 0.08);
+
+  transition: 0.3s ease;
+}
