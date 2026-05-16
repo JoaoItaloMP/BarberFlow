@@ -887,3 +887,18 @@ h3 {
     transform: translateY(0);
   }
 }
+
+/* =========================
+   DRAG AND DROP
+========================== */
+
+.fc-event {
+
+  cursor: grab;
+}
+
+/* Arrastado */
+.fc-event:active{
+
+  cursor: grabbing;
+}

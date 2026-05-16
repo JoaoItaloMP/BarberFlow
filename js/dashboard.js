@@ -804,6 +804,11 @@ const calendar =
     height: "auto",
 
     /*
+      Permite mover eventos
+    */
+    editable: true,
+
+    /*
       Permite clicar
       nos dias.
     */
@@ -894,7 +899,79 @@ const calendar =
         "active"
       );
 
+    },
+
+    /*
+      Evento movido
+    */
+   eventDrop(info) {
+
+    /*
+      Evento atualizado
+    */
+    const movedEvent =
+      info.event;
+    
+    /*
+      Busca agendamentos
+    */
+    const appointments =
+      getAppointments();
+
+    /*
+      Busca agendamentos
+      correspondente;
+    */
+    
+    const appointment =
+      appointments.find((appointment) => {
+
+        return ( 
+          '${appointment.time} - ${appointment.name}'
+          ===
+          movedEvent.title
+        );
+
+      });
+
+    /*
+      Se encontrou
+    */
+    if (appointment) {
+
+      /*
+        Atualiza data
+      */
+      appointment.data =
+        movedEvent.startStr.split("T")[0];
+      
+      /*
+        Salva alterações
+      */
+      saveAppointments(
+        appointments
+      );
+
+      /*
+        Atualiza cards
+      */
+     renderAppointments();
+
+      /*
+        Atualiza métricas
+      */
+     updateStats();
+
+      /*
+        Toast
+      */
+      showToast(
+        "Agendamento movido com sucesso"
+      );
+
     }
+    
+   }
 
 });
 
