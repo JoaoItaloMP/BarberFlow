@@ -801,7 +801,32 @@ const calendar =
 
     locale: "pt-br",
 
+    /*
+      Barra ferramentas
+    */
+    headerToolbar: {
+
+      left:
+        "prev,next today",
+
+      center:
+        "title",
+
+      right:
+        "dayGridMonth,timeGridWeek,timeGridDay"
+
+    },
+
     height: "auto",
+
+    /*
+      Horário comercial
+    */
+    slotMinTime: "08:00:00",
+
+    slotMaxTime: "22:00:00",
+
+    allDaySlot: false,
 
     /*
       Permite mover eventos
@@ -970,7 +995,7 @@ const calendar =
       );
 
     }
-    
+
    }
 
 });

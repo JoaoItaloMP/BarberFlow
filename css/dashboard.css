@@ -902,3 +902,46 @@ h3 {
 
   cursor: grabbing;
 }
+
+/* =========================
+   VISUAL SEMANAL
+========================== */
+
+/* Horários */
+.fc-timegrid-slot {
+
+  height: 70px !important;
+}
+
+/* Texto horários */
+.fc-timegrid-slot-label {
+
+  color:
+    rgba(255,255,255,0.7);
+}
+
+/* Linha atual */
+.fc-timegrid-now-indicator-line {
+
+  border-color:
+    #c59d5f !important;
+}
+
+/* Área atual */
+.fc-timegrid-now-indicator-arrow {
+
+  border-color:
+    #c59d5f !important;
+}
+
+/* Eventos */
+.fc-timegrid-event {
+
+  border: none !important;
+
+  border-radius: 14px !important;
+
+  padding: 6px !important;
+
+  font-size: 0.85rem !important;
+}
