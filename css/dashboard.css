@@ -777,3 +777,113 @@ h3 {
 
   transition: 0.3s ease;
 }
+
+/* =========================
+   MODAL
+========================== */
+
+#event-modal {
+
+  position: fixed;
+
+  inset: 0;
+
+  background:
+    rgba(0,0,0,0.7);
+
+  display: none;
+
+  justify-content: center;
+
+  align-items: center;
+
+  z-index: 999;
+}
+
+/* Modal ativo */
+#event-modal.active {
+
+  display: flex;
+}
+
+/* Conteúdo */
+.modal-content {
+
+  background:
+    #171b24;
+
+  width: 90%;
+
+  max-width: 500px;
+
+  padding: 30px;
+
+  border-radius: 24px;
+
+  border:
+    1px solid rgba(255,255,255,0.06);
+
+  position: relative;
+
+  animation:
+    modalFade 0.3s ease;
+}
+
+/* Botão fechar */
+#close-modal {
+
+  position: absolute;
+
+  top: 20px;
+
+  right: 20px;
+
+  width: 40px;
+
+  height: 40px;
+
+  border-radius: 50%;
+
+  padding: 0;
+}
+
+/* Conteúdo do modal */
+#modal-body {
+
+  margin-top: 20px;
+
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 14px;
+}
+
+/* Informações */
+#modal-body p {
+
+  background:
+    rgba(255,255,255,0.04);
+
+  padding: 14px;
+
+  border-radius: 14px;
+}
+
+/* Animação */
+@keyframes modalFade {
+
+  from {
+
+    opacity: 0;
+
+    transform: translateY(20px);
+  }
+
+  to {
+
+    opacity: 1;
+
+    transform: translateY(0);
+  }
+}

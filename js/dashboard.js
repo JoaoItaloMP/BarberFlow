@@ -15,6 +15,15 @@ const clientNameInput =
 const dateInput =
   document.querySelector("#date");
 
+/* Modal */
+const eventModal =
+  document.querySelector("#event-modal");
+
+const modalBody =
+  document.querySelector("#modal-body");
+
+const closeModalButton =
+  document.querySelector("#close-modal");
 /*
   Captura a lista onde
   os cards serão renderizados.
@@ -808,8 +817,7 @@ const calendar =
         info.dateStr;
 
       /*
-        Faz scroll suave
-        até formulário.
+        Scroll suave
       */
       form.scrollIntoView({
 
@@ -818,8 +826,7 @@ const calendar =
       });
 
       /*
-        Foca no nome
-        do cliente.
+        Foca input nome
       */
       clientNameInput.focus();
 
@@ -828,6 +835,63 @@ const calendar =
       */
       showToast(
         "Data selecionada no calendário"
+      );
+
+    },
+
+    /*
+      Clique em evento
+    */
+    eventClick(info) {
+
+      /*
+        Dados evento
+      */
+      const event =
+        info.event;
+
+      /*
+        Conteúdo modal
+      */
+      modalBody.innerHTML = `
+
+        <p>
+          <strong>Cliente:</strong>
+          ${event.title}
+        </p>
+
+        <p>
+          <strong>Serviço:</strong>
+          ${event.extendedProps.service}
+        </p>
+
+        <p>
+          <strong>Status:</strong>
+          ${event.extendedProps.status}
+        </p>
+
+        <p>
+          <strong>Data:</strong>
+          ${event.start.toLocaleDateString()}
+        </p>
+
+        <p>
+          <strong>Horário:</strong>
+          ${event.start.toLocaleTimeString([], {
+
+            hour: "2-digit",
+            minute: "2-digit"
+
+          })}
+        </p>
+
+      `;
+
+      /*
+        Abre modal
+      */
+      eventModal.classList.add(
+        "active"
       );
 
     }
@@ -841,3 +905,18 @@ calendar.render();
 
 /* Atualiza eventos */
 updateCalendarEvents();
+
+/* =========================
+   FECHAR MODAL
+========================== */
+
+closeModalButton.addEventListener(
+  "click",
+  () => {
+
+    eventModal.classList.remove(
+      "active"
+    );
+
+  }
+);
